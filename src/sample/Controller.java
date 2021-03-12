@@ -1,40 +1,62 @@
 package sample;
 
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+
+import java.util.ArrayList;
 
 public class Controller {
-    /*  David Garcia
-    Jueves 11 de Marzo
- */
 
-//Esto que viene crea los objetos que componen la interface grafica
+    int counter = 0;
+    String count = String.valueOf(counter);
+    ObservableList<String> comboContentUno=
+            FXCollections.observableArrayList();
 
-    // esquema HBox
-    @FXML private ComboBox esquemaCombo;
+
+    // Esquema
+    @FXML private ComboBox<String> esquemaCombo;
     @FXML private TextField esquemaText;
     @FXML private Button nuevoEsquemaButton;
     @FXML private Button borrarEsquemaButton;
 
-    // tabla HBox
-    @FXML private ComboBox tablaCombo;
+    // Tabla
+    @FXML private HBox TablaHBox;
+    @FXML private ComboBox<?> tablaCombo;
     @FXML private TextField tablaText;
     @FXML private Button nuevaTablaButton;
     @FXML private Button borrarTablaButton;
 
-    // Busqueda HBox
-    @FXML private ComboBox columnaCombo;
+    //Busqueda
+
+    @FXML private ComboBox<?> columnaCombo;
     @FXML private TextField busquedaText;
     @FXML private Button buscarButton;
     @FXML private Button borrarButton;
-    @FXML private Button cargarButton;
 
-    public void nuevoEsquemaButton (ActionEvent event) {
+    @FXML
+    private Button cargarButton;
+
+    String test;
+
+    @FXML
+    void nuevoEsquemaButton(MouseEvent event) {
+        test = esquemaText.getText();
+        comboContentUno.add(test);
+        esquemaCombo.setItems(comboContentUno);
+//        Limpiar textfield para ingresar un nuevo esquema
+//        Map<String, Object>
+
+
     }
+
+
+
 
 
 }
