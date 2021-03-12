@@ -3,6 +3,7 @@ package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -46,14 +47,28 @@ public class Controller {
 
     @FXML
     void nuevoEsquemaButton(MouseEvent event) {
+
         test = esquemaText.getText();
+        if(test.isEmpty()){
+            Alert alert=new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Agregar esquema");
+            alert.setContentText("Existen campos vacíos");
+            alert.showAndWait();
+        }
+        else{
         comboContentUno.add(test);
         esquemaCombo.setItems(comboContentUno);
-//        Limpiar textfield para ingresar un nuevo esquema
+        // Limpiar textfield para ingresar un nuevo esquema
+        esquemaText.setText("");
+
+        }
+
 //        Map<String, Object>
 
 
-        // prueba GitHub
+
+        }
+
 
 
     }
@@ -62,4 +77,3 @@ public class Controller {
 
 
 
-}
