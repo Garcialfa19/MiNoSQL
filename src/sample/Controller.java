@@ -10,9 +10,50 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class Controller {
+    private String ruta_txt="mi.txt";
+    Esquema tabla;
+    Progreso prog;
+    public Controller() {
+        prog = new Progreso();
+
+        try {
+            cargar_txt();
+            listarRegistro();
+        } catch (Exception ex) {
+            mensaje("No existe el archivo txt");
+        }
+
+        rbc.setSelected(true);
+    }
+    public void cargar_txt() {
+        File ruta = new File(ruta_txt);
+        try {
+
+            FileReader fi = new FileReader(ruta);
+            BufferedReader bu = new BufferedReader(fi);
+
+            String linea = null;
+            while ((linea = bu.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(linea, ",");
+                tabla = new Esquema();
+                tabla.setId(Integer.parseInt(st.nextToken()));
+                tabla.setTabla(st.nextToken());
+                tabla.setColumnas(st.nextElement(toString()));
+                prog.agregarRegistro(tabla);
+            }
+            bu.close();
+        } catch (Exception ex) {
+            message("Error al cargar archivo: " + ex.getMessage());
+            System.out.println(ex.getMessage());
+        }
+    }
 
     int counter = 0;
     String count = String.valueOf(counter);
